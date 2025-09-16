@@ -5,6 +5,7 @@ import {
   Img,
   Flex,
   Center,
+  Button,
   useColorModeValue,
   HStack,
 } from "@chakra-ui/react";
@@ -72,17 +73,17 @@ const Item = ({ item }) => {
           <Flex
             p={4}
             alignItems="center"
-            justifyContent={"space-between"}
+            justifyContent={"center"}
             roundedBottom={"sm"}
             cursor={"pointer"}
             w="full"
           >
-           <Link to={`/item/${item.id}`}>
-           <Text fontSize={"md"} fontWeight={"semibold"}>
-            View More
-           </Text>
-           </Link>
-            <BsArrowUpRight />
+            <Link to={`/item/${item.id}`} style={{ display: "flex", alignItems: "center", gap: 4 }}>
+              <Text fontSize={"md"} fontWeight={"semibold"}>
+                Ver Detalles
+              </Text>
+              <BsArrowUpRight style={{ marginLeft: 4 }} />
+            </Link>
           </Flex>
         </HStack>
       </Box>

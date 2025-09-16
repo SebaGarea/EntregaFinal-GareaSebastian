@@ -12,6 +12,8 @@ import {
   Stack,
   useColorMode,
   Center,
+  Text,
+  HStack
 } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { CartWidget } from "../CartWidget";
@@ -30,25 +32,26 @@ export const NavBar = () => {
       px={4}
       boxShadow={"md"}
       borderRadius={"md"}
+      position="sticky"
+      top={0}
+      zIndex={10}
     >
       <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-        <Link to="/">
-          <Gi3dStairs
-            size={45}
-            color="teal"
-            style={{
-              transition: "transform 0.2s, color 0.2s",
-            }}
-            onMouseEnter={(e) => {
-              e.target.style.transform = "rotate(20deg)";
-              e.target.style.color = "darkcyan";
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.transform = "rotate(0deg)";
-              e.target.style.color = "teal";
-            }}
-          />
-        </Link>
+        <HStack spacing={3}>
+          <Link to="/" style={{ display: "flex", alignItems: "center" }}>
+            <Box
+              as={Gi3dStairs}
+              boxSize={12}
+              color="teal.400"
+              _hover={{ color: "teal.600", transform: "rotate(-10deg) scale(1.1)" }}
+              transition="all 0.2s"
+              mr={2}
+            />
+            <Text fontWeight="bold" fontSize="2xl" color="teal.600" letterSpacing={1} display={{ base: "none", md: "block" }}>
+              Ecommerce React
+            </Text>
+          </Link>
+        </HStack>
 
         <Menu>
           <MenuButton
@@ -68,59 +71,19 @@ export const NavBar = () => {
           </MenuList>
         </Menu>
 
-        <Flex alignItems={"center"}>
+        <Flex alignItems={"center"} gap={4}>
           <CartWidget />
-          <Stack direction={"row"} spacing={7}>
-            <Button
-              onClick={toggleColorMode}
-              rounded={"full"}
-              p={0}
-              colorScheme={colorMode === "light" ? "purple" : "orange"}
-              _hover={{
-                transform: "scale(1.1)",
-                boxShadow: "lg",
-              }}
-            >
-              {colorMode === "light" ? (
-                <MoonIcon boxSize={5} />
-              ) : (
-                <SunIcon boxSize={5} />
-              )}
-            </Button>
-
-            <Menu>
-              <MenuButton
-                as={Button}
-                rounded={"full"}
-                variant={"link"}
-                cursor={"pointer"}
-                minW={0}
-              >
-                <Avatar
-                  size={"sm"}
-                  src={"https://avatars.dicebear.com/api/male/username.svg"}
-                />
-              </MenuButton>
-              <MenuList alignItems={"center"}>
-                <br />
-                <Center>
-                  <Avatar
-                    size={"2xl"}
-                    src={"https://avatars.dicebear.com/api/male/username.svg"}
-                  />
-                </Center>
-                <br />
-                <Center>
-                  <p>Username</p>
-                </Center>
-                <br />
-                <MenuDivider />
-                <MenuItem>Your Servers</MenuItem>
-                <MenuItem>Account Settings</MenuItem>
-                <MenuItem>Logout</MenuItem>
-              </MenuList>
-            </Menu>
-          </Stack>
+          <Button
+            onClick={toggleColorMode}
+            colorScheme="teal"
+            variant="outline"
+            size="md"
+            title="Cambiar modo claro/oscuro"
+            _hover={{ bg: useColorModeValue("teal.100", "teal.700") }}
+            transition="all 0.2s"
+          >
+            {colorMode === "light" ? <MoonIcon boxSize={5} /> : <SunIcon boxSize={5} />}
+          </Button>
         </Flex>
       </Flex>
     </Box>
